@@ -4,10 +4,11 @@ import Button from '../Button/Button'
 
 export const Calculator = () => {
   const { 
-    display, 
-    handleNumberInput, 
-    handleOperation,
-    calculate,
+    display,
+    handleNumberInput,
+    handleOperation, 
+    handlePercent,   
+    calculate : handleEquals,
     clearDisplay,
     handleDecimal,
     toggleSign
@@ -21,7 +22,7 @@ export const Calculator = () => {
         {/* Fila 1 */}
         <Button onClick={clearDisplay}>C</Button>
         <Button onClick={toggleSign}>+/-</Button>
-        <Button onClick={() => handleOperation('%')}>%</Button>
+        <Button onClick={handlePercent}>%</Button>
         <Button onClick={() => handleOperation('÷')}>÷</Button>
         
         {/* Fila 2 */}
@@ -45,8 +46,8 @@ export const Calculator = () => {
         {/* Fila 5 */}
         <Button onClick={() => handleNumberInput('0')}>0</Button>
         <Button onClick={handleDecimal}>.</Button>
-        <Button onClick={() => handleOperation('%')}>MOD</Button>
-        <Button onClick={calculate}>=</Button>
+        <Button onClick={() => handleOperation('mod')}>MOD</Button>
+        <Button onClick={handleEquals}>=</Button>
       </div>
     </div>
   )
