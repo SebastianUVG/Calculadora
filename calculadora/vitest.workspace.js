@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 

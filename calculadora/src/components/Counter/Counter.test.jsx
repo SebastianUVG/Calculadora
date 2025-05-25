@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render,  fireEvent } from '@testing-library/react'
 import Counter from './Counter'
 import { expect, test } from 'vitest'
 

@@ -1,7 +1,41 @@
-.app-container {
-  min-height: 100vh;
-  background-color: #f9fafb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.calculator {
+  width: 300px;
+  margin: 0 auto;
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  background: #f5f5f5;
 }
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.keypad > button {
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Botón 0 ocupa doble espacio */
+.keypad > button:nth-last-child(2) {
+  grid-column: span 2;
+}
+
+/* Estilos para botones especiales */
+.keypad > button:nth-child(1) { /* C */ background-color: #e74c3c; color: white; }
+.keypad > button:nth-child(2) { /* +/- */ background-color: #95a5a6; color: white; }
+.keypad > button:nth-child(3) { /* % */ background-color: #3498db; color: white; }
+.keypad > button:nth-child(4),  /* ÷ */
+.keypad > button:nth-child(8),  /* × */
+.keypad > button:nth-child(12), /* - */
+.keypad > button:nth-child(16) { /* + */ 
+  background-color: #f39c12; 
+  color: white; 
+}
+.keypad > button:nth-last-child(1) { /* = */ background-color: #2ecc71; color: white; }

@@ -1,20 +1,16 @@
-import PropTypes from 'prop-types';
-import './Button.css'; // Archivo de estilos local
-
-const Button = ({ onClick, children }) => {
+const Button = ({ onClick, children, type = 'number' }) => {
+  const buttonClass = `btn ${type}`
+  
   return (
     <button 
+      className={buttonClass}
       onClick={onClick}
-      className="custom-button"
+      data-testid={`button-${children}`}
     >
       {children}
     </button>
-  );
-};
+    
+  )
+}
 
-Button.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired
-};
-
-export default Button;
+export default Button
