@@ -1,5 +1,5 @@
 import Button from './Button'
-import './Button.css' // Importa los estilos
+import './Button.css' 
 
 export default {
   title: 'Components/Button',

@@ -8,16 +8,17 @@ export const useCalculator = () => {
 
   /* ---------- Entrada de dígitos ---------- */
   const handleNumberInput = (num) => {
-    const maxDigits = display.startsWith('-') ? 8 : 9
-    if (display.replace('-', '').replace('.', '').length >= maxDigits) return
-
     if (waitingForOperand || display === '0') {
       setDisplay(num === '.' ? '0.' : num)
       setWaiting(false)
     } else {
-      setDisplay(display + num)
+      const newDisplay = display + num
+      const maxDigits = newDisplay.startsWith('-') ? 8 : 9
+      if (newDisplay.replace('-', '').replace('.', '').length > maxDigits) return
+      setDisplay(newDisplay)
     }
   }
+
 
   /* ---------- Operadores (+ – × ÷ mod) ---------- */
   const handleOperation = (op) => {
@@ -56,23 +57,35 @@ export const useCalculator = () => {
   /* ---------- Lógica de cálculo ---------- */
   const _compute = () => {
     const current = parseFloat(display)
-    let   result
+    let result
 
     switch (operation) {
-      case '+':  result = storedValue + current;               break
-      case '-':  result = storedValue - current;               break
-      case '×':  result = storedValue * current;               break
+      case '+':  result = storedValue + current; break
+      case '-':  result = storedValue - current; break
+      case '×':  result = storedValue * current; break
       case '÷':  result = current === 0 ? 'ERROR' : storedValue / current; break
       case 'mod':result = current === 0 ? 'ERROR' : storedValue % current; break
       default:   return current
     }
 
-    /* ---- Validaciones habituales ---- */
+    if (result === 'ERROR') 
+      return result
     const resultStr = String(result)
-    if (resultStr.replace('-', '').length > 9)   return 'ERROR'
-    if (Math.abs(result) > 999_999_999)          return 'ERROR'
-    return result
+
+    if (resultStr.replace('-', '').length <= 9) 
+      return resultStr
+
+    // Redondear y recortar si es decimal
+    if (Number.isFinite(result) && !Number.isInteger(result)) {
+      let rounded = result.toFixed(8) // usar hasta 8 decimales 
+      const trimmed = rounded.slice(0, 9)
+      return trimmed
+    }
+
+    // Si es entero muy largo, mostrar ERROR
+    return 'ERROR'
   }
+
 
   /* ---------- Utilidades ---------- */
   const clearDisplay = () => {
@@ -86,11 +99,14 @@ export const useCalculator = () => {
     if (waitingForOperand) {
       setDisplay('0.')
       setWaiting(false)
-    } else if (!display.includes('.')
-            && display.replace('-', '').length < 9) {
+    } else if (
+      !display.includes('.') &&
+      display.replace('-', '').length < 9
+    ) {
       setDisplay(display + '.')
     }
   }
+
 
   const toggleSign = () => {
     if (display === '0') return

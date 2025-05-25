@@ -1,3 +1,5 @@
+import './Button.css'
+
 const Button = ({ onClick, children, type = 'number' }) => {
   const buttonClass = `btn ${type}`
   

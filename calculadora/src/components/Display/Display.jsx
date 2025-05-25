@@ -1,3 +1,5 @@
+import './Display.css'
+
 const Display = ({ value }) => {
   // Formatear el valor para mostrar
   const formatValue = (val) => {
