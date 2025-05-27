@@ -4,7 +4,7 @@ import './App.css' // Importa tus estilos
 function App() {
   return (
     <div className="app">
-      <h1 style={{ textAlign: 'center', color: '#333' }}>Calculadora</h1>
+      <h1 style={{ textAlign: 'center', color: '#ffffff' }}>Calculadora</h1>
       <Calculator />
     </div>
   )

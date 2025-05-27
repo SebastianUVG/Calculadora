@@ -70,10 +70,13 @@ export const useCalculator = () => {
 
     if (result === 'ERROR') 
       return result
+    if (result < 0) 
+      return 'ERROR'
     const resultStr = String(result)
 
     if (resultStr.replace('-', '').length <= 9) 
       return resultStr
+    
 
     // Redondear y recortar si es decimal
     if (Number.isFinite(result) && !Number.isInteger(result)) {
